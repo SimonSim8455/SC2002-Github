@@ -32,7 +32,7 @@ public class MovieRankMgr {
 	}
 	
 	public static boolean createMovieRank(int movieID, int numRaters, double overallRating, double sales) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		int movieRankID = Helper.getUniqueId(movieRankList);
@@ -42,7 +42,7 @@ public class MovieRankMgr {
 	}
 	
 	public static boolean createMovieRank(int movieID, int numRaters, double overallRating) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		int movieRankID = Helper.getUniqueId(movieRankList);
@@ -53,7 +53,7 @@ public class MovieRankMgr {
 	
 
 	public static boolean createMovieRank(int movieID) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		int movieRankID = Helper.getUniqueId(movieRankList);
@@ -64,7 +64,7 @@ public class MovieRankMgr {
 	
 
 	public static boolean addSales(int movieID, double price) {
-		if(Validator.validateMovieRank(movieID) == -1) {
+		if(Validator.validateMovie(movieID)== false) {
 			return false;
 		}
 		MovieRank buffer2 = SearchUtils.searchMovieRankByMovieID(movieID);
@@ -74,7 +74,7 @@ public class MovieRankMgr {
 	}
 	
 	public static boolean addRating(int movieID,int userID,int rating) {
-		if(Validator.validateMovieRank(movieID) == -1) {
+		if(Validator.validateMovie(movieID)== false || Validator.validateUser(userID) == false) {
 			return false;
 		}
 		MovieRank buffer = SearchUtils.searchMovieRankByMovieID(movieID);
@@ -86,7 +86,10 @@ public class MovieRankMgr {
 	}
 	
 	public static boolean changeRating(int movieID,int userID,int rating) {
-		if(Validator.validateMovieRank(movieID) == -1) {
+		if(Validator.validateMovie(movieID)== false ||Validator.validateUser(userID) == false ) {
+			return false;
+		}
+		if(Validator.validateReview(userID, movieID) == false) {
 			return false;
 		}
 		MovieRank buffer = SearchUtils.searchMovieRankByMovieID(movieID);

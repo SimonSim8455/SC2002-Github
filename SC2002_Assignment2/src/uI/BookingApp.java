@@ -9,6 +9,7 @@ import java.util.Scanner;
 import database.Data;
 import manager.BookingMgr;
 import manager.CinemaMgr;
+import manager.CineplexMgr;
 import manager.ShowStatusMgr;
 import manager.UserAccountMgr;
 import utils.DateUtils;
@@ -43,6 +44,7 @@ public class BookingApp {
 		ShowStatus buffer = showStatusList.get(index);
 		Cinema cinema = CinemaMgr.getCinemaByID(buffer.getCinemaID());
 		UserAccount user = UserAccountMgr.getUserAccount(AppState.getUserID());
+		Cineplex cineplex = CineplexMgr.getCineplexByID(buffer.getCineplexID());
 		
 		StringToSeat.printSeat(buffer.getseatStatus());
 		
@@ -84,9 +86,12 @@ public class BookingApp {
 		System.out.println("Mobile Number: "+user.getMobileNumber());
 		System.out.println("Email: "+user.getEmail());
 		System.out.println("TID: "+booking.getTID());
-		System.out.println("Ticket Price: "+booking.getPrice());
-		System.out.println("SeatID: "+seatID);
+		System.out.println("Ticket Price: "+booking.getPrice()+" SGD");
 		System.out.println("MovieType: "+buffer.getMovieType());
+		System.out.println("SeatID: "+seatID);
+		System.out.println("Cinema Code: "+cinema.getCinemaCode());
+		System.out.println("Cinema Class: "+cinema.getCinemaType());
+		System.out.println("Cineplex Name: "+cineplex.getName());
 		
 	}
 	

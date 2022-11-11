@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.DateUtils;
 import utils.TimeUtils;
 
-public class Booking {
+public class Booking implements Serializable {
 	private int bookingID;
     private int userID;
     private String seatID;
@@ -24,14 +26,14 @@ public class Booking {
     	this.bookingTime = bookingTime;
     	this.showStatusID = showStatusID;
     	
+    	String day = String.valueOf(bookingDate.getDay());
     	String year = String.valueOf(bookingDate.getYear());
-    	
     	String month = String.valueOf(bookingDate.getMonth());
+    	
     	if(bookingDate.getMonth() <10) {
     		month = "0" + String.valueOf(bookingDate.getMonth());
     	}
     	
-    	String day = String.valueOf(bookingDate.getDay());
     	if(bookingDate.getDay() <10) {
     		day = "0" + String.valueOf(bookingDate.getDay());
     	}

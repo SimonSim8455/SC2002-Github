@@ -32,10 +32,6 @@ public class PriceCalculator {
 			basePrice = basePrice + tp.getCoupleClassTicket();
 		}
 		
-		if(seatType == SeatType.GOLD_T) {
-			basePrice = basePrice + tp.getGoldClassTicket();
-		}
-		
 		if(movieType == MovieType.TWOD) {
 			basePrice = basePrice +tp.getMovie2DPrice();
 		}

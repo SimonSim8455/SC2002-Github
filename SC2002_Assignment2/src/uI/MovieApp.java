@@ -31,13 +31,13 @@ public class MovieApp {
 					Printer.displayAllMovie(0);
 					break;
 				case 2:
-					Printer.displayMovie(1, 5, 1);
+					Printer.displayMovie(1, 5);
 					break;
 				case 3:
-					Printer.displayMovie(2, 5, 1);
+					Printer.displayMovie(2, 5);
 					break;
 				case 4:
-					SearchMovie(sc);
+					Printer.SearchMovie(sc, "", 1);
 					break;
 				case 5:
 					BookTicket(sc);
@@ -56,7 +56,7 @@ public class MovieApp {
 			System.out.print("You must login first before you can rate a movie\n");
 			return;
 		}
-		int movieID = SearchMovie(sc);
+		int movieID = Printer.SearchMovie(sc, "For Review", 1);
 		if(movieID == -1) {
 			return;
 		}
@@ -71,80 +71,14 @@ public class MovieApp {
 			System.out.print("You must login first before you can book tickets\n");
 			return;
 		}
-		String str;
-		sc.nextLine();
-		while(true) {
-			System.out.print("\nEnter movie title for booking: ");
-			str = sc.nextLine();
-			ArrayList<Movie> result = new ArrayList<Movie>();
-			result = Helper.SearchResultsForBooking(str);
-			if(result.size() == 0) {
-				System.out.println("\nNo Movie Found\n");
-				return;
-			}
-			System.out.println("\nSearch Results:\n");
-			for(int j=0;j<result.size();j++) {
-				System.out.println(j+1+") "+result.get(j).getTitle());
-			}
-			int resultIndex;
-			System.out.println();
-			while(true) {	
-				System.out.print("Please Enter Movie ID For Booking(or enter 0 to quit): ");
-				resultIndex = sc.nextInt() -1;
-				sc.nextLine();
-				if(resultIndex <= -1) {
-					return;
-				}
-				if(resultIndex>= result.size()) {
-					System.out.print("Please choose a valid ID\n");
-				}else {
-					break;
-				}
-			}
-			Movie movie = result.get(resultIndex);
-			AppState.setMovieID(movie.getMovieID());
-			BookingApp.AppMain(sc);
-			AppState.setMovieID(-1);
+		int movieID = Printer.SearchMovie(sc, "For Booking", 0);
+		if(movieID == -1) {
 			return;
 		}
-	}
-
-	
-	public static int SearchMovie(Scanner sc) {
-		String str;
-		sc.nextLine();
-		while(true) {
-			System.out.print("\nEnter movie title: ");
-			str = sc.nextLine();
-			ArrayList<Movie> result = new ArrayList<Movie>();
-			result = Helper.SearchResultsForViewing(str);
-			if(result.size() == 0) {
-				System.out.println("\nNo Movie Found\n");
-				return -1;
-			}
-			System.out.println("\nSearch Results:\n");
-			for(int j=0;j<result.size();j++) {
-				System.out.println(j+1+") "+result.get(j).getTitle());
-			}
-			int resultIndex;
-			System.out.println();
-			while(true) {	
-				System.out.print("Please Enter Movie ID (or enter 0 to quit): ");
-				resultIndex = sc.nextInt() -1;
-				sc.nextLine();
-				if(resultIndex <= -1) {
-					return -1;
-				}
-				if(resultIndex>= result.size()) {
-					System.out.print("Please choose a valid ID\n");
-				}else {
-					break;
-				}
-			}
-			Movie movie = result.get(resultIndex);
-			Printer.displayMovieDetails(movie.getMovieID());
-			return movie.getMovieID();
-		}
+		AppState.setMovieID(movieID);
+		BookingApp.AppMain(sc);
+		AppState.setMovieID(-1);
+		return;
 	}
 
 }

@@ -1,8 +1,10 @@
 package model;
+import java.io.Serializable;
+
 import utils.*;
 
 
-public class ShowStatus {
+public class ShowStatus implements Serializable{
 	private int showStatusID;
 	private int cineplexID;
 	private int cinemaID;

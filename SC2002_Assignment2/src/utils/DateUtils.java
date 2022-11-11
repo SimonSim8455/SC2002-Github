@@ -1,9 +1,10 @@
 package utils;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class DateUtils {
+public class DateUtils implements Serializable{
     private int day;
     private int month;
     private int year;
@@ -34,7 +35,18 @@ public class DateUtils {
     }
     
     public static void print(DateUtils date) {
-    	System.out.print(date.getDay()+"/"+date.getMonth()+"/"+ date.getYear());
+    	String day = String.valueOf(date.getDay());
+    	String year = String.valueOf(date.getYear());
+    	String month = String.valueOf(date.getMonth());
+
+    	if(date.getMonth() <10) {
+    		month = "0" + String.valueOf(date.getMonth());
+    	}
+    	
+    	if(date.getDay() <10) {
+    		day = "0" + String.valueOf(date.getDay());
+    	}
+    	System.out.print(day+"/"+month+"/"+ year);
     }
     
     public static DateUtils promptInput(Scanner sc) {

@@ -262,7 +262,7 @@ public class DataInitializer {
 		plan1[4] = "[ ][ ][ ][ ]   [ ][ ][ ]";
 		SeatType [][] seatPlan1 = StringToSeat.strToSeatType(plan1);
 		CinemaType type1 = CinemaType.NORMAL;
-		CinemaMgr.createCinema(0,type1, seatPlan1);
+		CinemaMgr.createCinema(0,type1, seatPlan1, "001");
 		
 		
 		String [] plan2 = new String[5];
@@ -273,7 +273,7 @@ public class DataInitializer {
 		plan2[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
 		SeatType [][] seatPlan2 = StringToSeat.strToSeatType(plan2);
 		CinemaType type2 = CinemaType.NORMAL;
-		CinemaMgr.createCinema(0,type2, seatPlan2);
+		CinemaMgr.createCinema(0,type2, seatPlan2, "002");
 		
 		
 		String [] plan3 = new String[5];
@@ -284,7 +284,7 @@ public class DataInitializer {
 		plan3[4] = "[    ][    ]   [    ][    ]";
 		SeatType [][] seatPlan3 = StringToSeat.strToSeatType(plan3);
 		CinemaType type3 = CinemaType.PLATINIUM;
-		CinemaMgr.createCinema(0,type3, seatPlan3);
+		CinemaMgr.createCinema(0,type3, seatPlan3, "003");
 		
 		
 		String [] plan4 = new String[5];
@@ -295,7 +295,7 @@ public class DataInitializer {
 		plan4[4] = "[    ][    ]   [    ][    ]";
 		SeatType [][] seatPlan4 = StringToSeat.strToSeatType(plan4);
 		CinemaType type4 = CinemaType.NORMAL;
-		CinemaMgr.createCinema(1,type4, seatPlan4);
+		CinemaMgr.createCinema(1,type4, seatPlan4, "004");
 		
 		
 		String [] plan5 = new String[5];
@@ -308,7 +308,7 @@ public class DataInitializer {
 		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ]";
 		SeatType [][] seatPlan5 = StringToSeat.strToSeatType(plan5);
 		CinemaType type5 = CinemaType.NORMAL;
-		CinemaMgr.createCinema(1,type5, seatPlan5);
+		CinemaMgr.createCinema(1,type5, seatPlan5, "005");
 		
 		
 		String [] plan6 = new String[5];
@@ -319,7 +319,7 @@ public class DataInitializer {
 		plan6[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
 		SeatType [][] seatPlan6 = StringToSeat.strToSeatType(plan6);
 		CinemaType type6 = CinemaType.PLATINIUM;
-		CinemaMgr.createCinema(1,type6, seatPlan6);
+		CinemaMgr.createCinema(1,type6, seatPlan6, "006");
 		
 		
 		String [] plan7 = new String[5];
@@ -330,7 +330,7 @@ public class DataInitializer {
 		plan7[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
 		SeatType [][] seatPlan7 = StringToSeat.strToSeatType(plan7);
 		CinemaType type7 = CinemaType.NORMAL;
-		CinemaMgr.createCinema(2,type7, seatPlan7);
+		CinemaMgr.createCinema(2,type7, seatPlan7, "007");
 		
 		String [] plan8 = new String[5];
 		plan8[0] = "      [ ][ ][ ][ ][ ][ ]";
@@ -340,7 +340,7 @@ public class DataInitializer {
 		plan8[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
 		SeatType [][] seatPlan8 = StringToSeat.strToSeatType(plan8);
 		CinemaType type8 = CinemaType.NORMAL;
-		CinemaMgr.createCinema(2,type8, seatPlan8);
+		CinemaMgr.createCinema(2,type8, seatPlan8, "008");
 		
 		
 		String [] plan9 = new String[5];
@@ -351,7 +351,7 @@ public class DataInitializer {
 		plan9[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
 		SeatType [][] seatPlan9 = StringToSeat.strToSeatType(plan9);
 		CinemaType type9 = CinemaType.PLATINIUM;
-		CinemaMgr.createCinema(2,type9, seatPlan9);
+		CinemaMgr.createCinema(2,type9, seatPlan9, "009");
 		
 	}
 }

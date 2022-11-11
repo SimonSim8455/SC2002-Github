@@ -13,7 +13,7 @@ public class UserAccountMgr {
 	private static HashMap<Integer,UserAccount> userAccountList=  Data.userAccountList;
 	
 	public static UserAccount getUserAccount(int userID) {
-		if(Validator.validateUser(userID) !=1) {
+		if(Validator.validateUser(userID) ==false) {
 			return null;
 		}
 		UserAccount user = SearchUtils.searchUserAccount(userID);
@@ -23,7 +23,7 @@ public class UserAccountMgr {
 	
 	//userAccount cant be remove
 	public static boolean createUserAccount(String username,String password,String mobileNumber,String email,int age) {
-		if(Validator.validateUser(username) == 1) {
+		if(Validator.validateUser(username) == true) {
 			return false;
 		}
 		int userID = Helper.getUniqueId(userAccountList);
@@ -33,7 +33,7 @@ public class UserAccountMgr {
 	}
 	
 	public static boolean updateEmail(int userID, String text) {
-		if(Validator.validateUser(userID) != 1) {
+		if(Validator.validateUser(userID) == false) {
 			return false;
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
@@ -42,7 +42,7 @@ public class UserAccountMgr {
 	}
 	
 	public static boolean updateMobileNumber(int userID, String text) {
-		if(Validator.validateUser(userID) != 1) {
+		if(Validator.validateUser(userID) == false) {
 			return false;
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
@@ -51,7 +51,7 @@ public class UserAccountMgr {
 	}
 	
 	public static boolean updatePassword(int userID, String text) {
-		if(Validator.validateUser(userID) != 1) {
+		if(Validator.validateUser(userID) == false) {
 			return false;
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
@@ -60,11 +60,11 @@ public class UserAccountMgr {
 	}
 	
 	public static boolean updateUsername(int userID, String text) {
-		if(Validator.validateUser(userID) != 1) {
+		if(Validator.validateUser(userID) == false) {
 			return false;
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
-		if(Validator.validateUser(text) == 1) {
+		if(Validator.validateUser(text) == true) {
 			return false;
 		}
 		updateUser.setUsername(text);
@@ -72,7 +72,7 @@ public class UserAccountMgr {
 	}
 	
 	public static boolean updateUserAge(int userID, int num) {
-		if(Validator.validateUser(userID) != 1) {
+		if(Validator.validateUser(userID)== false) {
 			return false;
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
@@ -84,7 +84,7 @@ public class UserAccountMgr {
 	
 	
 	public static int validateUserLogin(String username, String password) {
-		if(Validator.validateUser(username) != 1) {
+		if(Validator.validateUser(username) == false) {
 			return -2;
 		}
 		

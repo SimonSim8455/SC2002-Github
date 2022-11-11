@@ -52,10 +52,10 @@ public class UserAccountApp {
 		System.out.print("\n========================================\n");
 		System.out.print("               User Login                 \n");
 		System.out.print("========================================\n");
-		System.out.print("Enter Your Username: ");
+		System.out.print("Enter Username: ");
 		sc.nextLine();
 		str = sc.nextLine();
-		System.out.print("Enter Your Password: ");
+		System.out.print("Enter Password: ");
 		str2 = sc.nextLine();
 		int userID =UserAccountMgr.validateUserLogin(str, str2);
 		if(userID <0) {

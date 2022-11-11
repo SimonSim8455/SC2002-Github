@@ -19,7 +19,7 @@ public class BookingMgr {
 	
 	public static int createBooking(int userID, int showStatusID, double price,
     		DateUtils bookingDate,TimeUtils bookingTime) {
-		if(Validator.validateUser(userID) != 1 || Validator.validateShowStatus(showStatusID) != 1) {
+		if(!(Validator.validateUser(userID) && Validator.validateShowStatus(showStatusID))) {
 			return -1;
 		}
 
@@ -36,10 +36,10 @@ public class BookingMgr {
 	
 	public static int createBooking(int userID, int showStatusID, double price,
     		LocalDate date,LocalTime time) {
-		if(Validator.validateUser(userID) != 1 || Validator.validateShowStatus(showStatusID) != 1) {
+		if(!(Validator.validateUser(userID) && Validator.validateShowStatus(showStatusID))) {
 			return -1;
 		}
-		
+
 		DateUtils bookingDate = DateUtils.LocalDateToDateUtils(date);
 		TimeUtils bookingTime = TimeUtils.LocalTimeToTimeUtils(time);
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -55,7 +55,7 @@ public class BookingMgr {
 	}
 	
 	public static Booking getBookingCopy(int bookingID) {
-		if(Validator.validateBooking(bookingID) != 1) {
+		if(!(Validator.validateBooking(bookingID))) {
 			return null;
 		}
 		Booking buffer = SearchUtils.searchBooking(bookingID);
@@ -63,7 +63,7 @@ public class BookingMgr {
 	}
 	
 	public static ArrayList<Booking> getBookingListByUserID(int userID){
-		if(Validator.validateUser(userID) != 1 ) {
+		if(!Validator.validateUser(userID) ) {
 			return null;
 		}
 		ArrayList<Booking> list = new ArrayList<Booking>();

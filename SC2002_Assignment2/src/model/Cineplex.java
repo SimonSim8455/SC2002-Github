@@ -1,8 +1,8 @@
 package model;
 
+import java.io.Serializable;
 
-
-public class Cineplex {
+public class Cineplex implements Serializable{
     private int cineplexID;
     private String name;
     

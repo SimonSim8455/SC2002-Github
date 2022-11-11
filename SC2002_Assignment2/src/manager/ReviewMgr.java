@@ -14,7 +14,7 @@ public class ReviewMgr {
 	
 	public static ArrayList<MovieReview> getReveiwListByUserID(int userID){
 		ArrayList<MovieReview> list = new ArrayList<MovieReview>();
-		if(Validator.validateUser(userID)!= 1 ) {
+		if(Validator.validateUser(userID)== false ) {
 			return null;
 		}
 		for(MovieReview review : movieReviewList.values()) {
@@ -27,7 +27,7 @@ public class ReviewMgr {
 	
 	public static ArrayList<MovieReview> getReveiwListByMovieID(int movieID){
 		ArrayList<MovieReview> list = new ArrayList<MovieReview>();
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return null;
 		}
 		for(MovieReview review : movieReviewList.values()) {
@@ -39,10 +39,10 @@ public class ReviewMgr {
 	}
 	
 	public static boolean createMovieReview(int userID, int movieID, int rating, String comment) {
-		if(Validator.validateUser(userID)!= 1 || Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateUser(userID)== false || Validator.validateMovie(movieID) == false) {
 			return false;
 		}
-		if(Validator.validateReview(userID, movieID) !=1) {
+		if(Validator.validateReview(userID, movieID) == true) {
 			return false;
 		}
 		int reviewID = Helper.getUniqueId(movieReviewList);
@@ -53,10 +53,10 @@ public class ReviewMgr {
 	}
 	
 	public static boolean createMovieReview(int userID, int movieID,String comment) {
-		if(Validator.validateUser(userID)!= 1 || Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateUser(userID) == false || Validator.validateMovie(movieID) == false) {
 			return false;
 		}
-		if(Validator.validateReview(userID, movieID) !=1) {
+		if(Validator.validateReview(userID, movieID) == true) {
 			return false;
 		}
 		int reviewID = Helper.getUniqueId(movieReviewList);
@@ -66,10 +66,10 @@ public class ReviewMgr {
 	}
 	
 	public static boolean createMovieReview(int userID, int movieID, int rating) {
-		if(Validator.validateUser(userID)!= 1 || Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateUser(userID) == false || Validator.validateMovie(movieID) == false) {
 			return false;
 		}
-		if(Validator.validateReview(userID, movieID) !=1) {
+		if(Validator.validateReview(userID, movieID) == true) {
 			return false;
 		}
 		int reviewID = Helper.getUniqueId(movieReviewList);
@@ -81,13 +81,13 @@ public class ReviewMgr {
 	
 
 	public static boolean updateReviewRating(int userID, int movieID, int num ) {
-		if(Validator.validateUser(userID) == -1 || Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateUser(userID) == false || Validator.validateMovie(movieID) == false) {
+			return false;
+		}
+		if(Validator.validateReview(userID, movieID) == false) {
 			return false;
 		}
 		MovieReview buffer = SearchUtils.searchMovieReview(userID, movieID);
-		if(Validator.validateMovieReview(buffer.getReviewID()) == -1) {
-			return false;
-		}
 		MovieRankMgr.changeRating(movieID, userID, num);
 		buffer.setRating(num);
 		return true;
@@ -95,13 +95,13 @@ public class ReviewMgr {
 	
 	
 	public static boolean updateReviewComment(int userID, int movieID, String comment) {
-		if(Validator.validateUser(userID) == -1 || Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateUser(userID) == false || Validator.validateMovie(movieID) == false) {
+			return false;
+		}
+		if(Validator.validateReview(userID, movieID) == false) {
 			return false;
 		}
 		MovieReview buffer = SearchUtils.searchMovieReview(userID, movieID);
-		if(Validator.validateMovieReview(buffer.getReviewID()) == -1) {
-			return false;
-		}
 		buffer.setComment(comment);
 		return true;
 	}

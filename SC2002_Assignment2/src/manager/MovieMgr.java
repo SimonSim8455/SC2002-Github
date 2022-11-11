@@ -5,6 +5,7 @@ import java.util.HashMap;
 import database.Data;
 import model.Movie;
 import model.MovieStates;
+import model.ShowStatus;
 import utils.Helper;
 import utils.SearchUtils;
 import utils.Validator;
@@ -17,7 +18,7 @@ public class MovieMgr {
 			ArrayList<String> casts, String movieContent, double duration, MovieStates state, 
 			int numRaters, double overallRating, double sales) {
 		
-		if(Validator.validateMovie(title) != -1) {
+		if(Validator.validateMovie(title)  == true) {
 			return -1;
 		}
 		int movieID = Helper.getUniqueId(movieList);
@@ -31,7 +32,7 @@ public class MovieMgr {
 	public static int createMovie(String title, String director, 
 			ArrayList<String> casts, String movieContent, double duration, MovieStates state) {
 		
-		if(Validator.validateMovie(title) != -1) {
+		if(Validator.validateMovie(title) == true) {
 			return -1;
 		}
 		int movieID = Helper.getUniqueId(movieList);
@@ -43,16 +44,20 @@ public class MovieMgr {
 	}
 	
 	public static boolean removeMovie(int movieID) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		Movie movie = SearchUtils.searchMovie(movieID);
 		movie.setMovieState(MovieStates.NO_LONGER_SHOWING);
+		ArrayList<ShowStatus> list = ShowStatusMgr.getAllStatusListByMovieID(movieID);
+		for(int i=0;i<list.size();i++) {
+			ShowStatusMgr.removeShowStatus(list.get(i).getShowStatusID());
+		}
 		return true;
 	}
 		
 	public static boolean updateMovieContent(int movieID, String text) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -62,7 +67,7 @@ public class MovieMgr {
 	
 	
 	public static boolean updateMovieDirector(int movieID, String text) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -71,7 +76,10 @@ public class MovieMgr {
 	}
 	
 	public static boolean updateMovieTitle(int movieID, String title) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
+			return false;
+		}
+		if(Validator.validateMovie(title) == true) {
 			return false;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -80,8 +88,11 @@ public class MovieMgr {
 	}
 	
 	public static boolean updateMovieState(int movieID,MovieStates state) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
+		}
+		if(state == MovieStates.NO_LONGER_SHOWING) {
+			return removeMovie(movieID);
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
 		updateMovie.setMovieState(state);
@@ -90,7 +101,7 @@ public class MovieMgr {
 	}
 	
 	public static boolean addCasts(int movieID, String cast) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -105,7 +116,7 @@ public class MovieMgr {
 	}
 	
 	public static boolean removeCasts(int movieID, String cast) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -125,7 +136,7 @@ public class MovieMgr {
 	}
 	
 	public static boolean updateMovieDuration(int movieID, double duration) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -135,7 +146,7 @@ public class MovieMgr {
 	
 
 	public static Movie getMovieByID(int movieID) {
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return null;
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
@@ -160,7 +171,7 @@ public class MovieMgr {
 	}
 	
 	public static ArrayList<String> getCastsByMovieID(int movieID){
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return null;
 		}
 		Movie movie = SearchUtils.searchMovie(movieID);

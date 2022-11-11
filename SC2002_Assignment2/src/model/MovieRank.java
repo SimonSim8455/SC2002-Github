@@ -1,6 +1,8 @@
 package model;
 
-public class MovieRank {
+import java.io.Serializable;
+
+public class MovieRank implements Serializable{
 	private int movieRankID;
 	private int movieID;
 	private int numRaters;

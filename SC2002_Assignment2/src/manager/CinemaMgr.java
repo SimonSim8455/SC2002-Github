@@ -13,15 +13,16 @@ import model.*;
 public class CinemaMgr {
 	private static HashMap<Integer,Cinema> cinemaList =  Data.cinemaList;
 	
-	public static int createCinema(int cineplexID, CinemaType type,SeatType[][] seatPlan) {
-		if(Validator.validateCineplex(cineplexID) != 1) {
+	public static int createCinema(int cineplexID, CinemaType type,SeatType[][] seatPlan, String cinemaCode) {
+		if(Validator.validateCinema(cineplexID, cinemaCode) == true) {
 			return -1;
 		}
 		int cinemaID = Helper.getUniqueId(cinemaList);
-		Cinema newCinema = new Cinema(cinemaID,cineplexID,type,seatPlan);
+		Cinema newCinema = new Cinema(cinemaID,cineplexID,type,seatPlan,cinemaCode);
 		cinemaList.put(cinemaID, newCinema);
 		return cinemaID;
 	}
+	
 	public static Cinema getCinemaByID(int cinemaID) {
 		for(Cinema cinema: cinemaList.values()) {
 			if(cinema.getCinemaID() == cinemaID) {
@@ -40,7 +41,7 @@ public class CinemaMgr {
 	}
 	
 	public static ArrayList<Cinema> getCinemaListByCineplexID(int cineplexID){
-		if(Validator.validateCinema(cineplexID)!= 1) {
+		if(Validator.validateCineplex(cineplexID) == false) {
 			return null;
 		}
 		ArrayList<Cinema> list = new ArrayList<Cinema>();

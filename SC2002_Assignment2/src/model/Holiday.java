@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.DateUtils;
 
-public class Holiday {
+public class Holiday implements Serializable{
     private String holidayName;
     private int holidayID;
     private DateUtils holidayDate;

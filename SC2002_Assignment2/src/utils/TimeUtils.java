@@ -1,9 +1,10 @@
 package utils;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class TimeUtils {
+public class TimeUtils implements Serializable{
 	private int hour;
     private int minute;
     
@@ -29,7 +30,16 @@ public class TimeUtils {
     }
     
     public static void print(TimeUtils time) {
-    	System.out.print(time.getHour()+":"+time.getMinute());
+    	String hour = String.valueOf(time.getHour());
+    	if(time.getHour()<10) {
+    		hour = "0" + hour;
+    	}
+    	
+    	String minute =String.valueOf(time.getMinute());
+    	if(time.getMinute() <10) {
+    		minute = "0" + "minute";
+    	}
+    	System.out.print(hour+":"+minute);
     }
     
     public int getHour(){

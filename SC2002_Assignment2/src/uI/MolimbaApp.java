@@ -2,6 +2,7 @@ package uI;
 
 import java.util.Scanner;
 
+import database.Data;
 import database.DataInitializer;
 
 public class MolimbaApp {
@@ -42,16 +43,15 @@ public class MolimbaApp {
 	}
 	
 	
-	public static void main(String [] args) {
+	public static void AppMain(Scanner sc) {
 		displayWelcome();
-		DataInitializer.initialize();
-		Scanner sc = new Scanner(System.in);
 		int a;
 		do {
 			if(AppState.getUserID() == -1) {
 				a = PromptUserInput(sc);
 				switch(a) {
 				case 0:
+					Data.saveAllFiles();
 					return;
 				case 1:
 					UserAccountApp.AppMain(sc);
@@ -71,6 +71,7 @@ public class MolimbaApp {
 				a = PromptLoginUserInput(sc);
 				switch(a) {
 				case 0:
+					Data.saveAllFiles();
 					return;
 				case 1:
 					AppState.setUserID(-1);

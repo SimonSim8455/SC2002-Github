@@ -1,6 +1,8 @@
 package model;
 
-public enum CinemaType {
+import java.io.Serializable;
+
+public enum CinemaType implements Serializable{
 	NORMAL,
 	PLATINIUM
 }

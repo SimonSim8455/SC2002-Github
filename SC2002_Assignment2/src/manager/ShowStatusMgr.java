@@ -36,7 +36,7 @@ public class ShowStatusMgr {
 	}
 	
 	public static ShowStatus getShowStatusByID(int statusID) {
-		if(Validator.validateShowStatus(statusID) != 1) {
+		if(Validator.validateShowStatus(statusID) == false) {
 			return null;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(statusID);
@@ -46,10 +46,10 @@ public class ShowStatusMgr {
 	public static boolean createShowStatus(int cineplexID, int cinemaID, 
 			int movieID, DateUtils showDate, TimeUtils showTime, MovieType movieType, SeatType[][] seatStatus) {
 		
-		if(Validator.validateCineplex(cineplexID) != 1 || Validator.validateCinema(cinemaID) != 1) {
+		if(Validator.validateCineplex(cineplexID) ==false || Validator.validateCinema(cineplexID, cinemaID) ==false) {
 			return false;
 		}
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		int showStatusID = Helper.getUniqueId(showStatusList);
@@ -63,10 +63,10 @@ public class ShowStatusMgr {
 	public static boolean createShowStatus(int cineplexID, int cinemaID, 
 			int movieID, DateUtils showDate, TimeUtils showTime, MovieType movieType) {
 		
-		if(Validator.validateCineplex(cineplexID) != 1 || Validator.validateCinema(cinemaID) != 1) {
+		if(Validator.validateCineplex(cineplexID) ==false || Validator.validateCinema(cineplexID, cinemaID) ==false) {
 			return false;
 		}
-		if(Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		int showStatusID = Helper.getUniqueId(showStatusList);
@@ -79,7 +79,7 @@ public class ShowStatusMgr {
 	}
 	
 	public static boolean removeShowStatus(int showStatusID) {
-		if(Validator.validateShowStatus(showStatusID) ==-1) {
+		if(Validator.validateShowStatus(showStatusID) == false) {
 			return false;
 		}
 		showStatusList.remove(showStatusID);
@@ -87,7 +87,7 @@ public class ShowStatusMgr {
 	}
 	
 	public static boolean updateMovie(int showStatusID, int movieID) {
-		if(Validator.validateShowStatus(showStatusID) ==-1 || Validator.validateMovie(movieID) == -1) {
+		if(Validator.validateShowStatus(showStatusID) == false || Validator.validateMovie(movieID) == false) {
 			return false;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -100,7 +100,7 @@ public class ShowStatusMgr {
 		if(movie == null) {
 			return false;
 		}
-		if(Validator.validateShowStatus(showStatusID) ==-1) {
+		if(Validator.validateShowStatus(showStatusID) == false) {
 			return false;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -109,7 +109,7 @@ public class ShowStatusMgr {
 	}
 	
 	public static boolean updateShowDate(int showStatusID, DateUtils date) {
-		if(Validator.validateShowStatus(showStatusID) ==-1) {
+		if(Validator.validateShowStatus(showStatusID) ==false) {
 			return false;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -118,7 +118,7 @@ public class ShowStatusMgr {
 	}
 	
 	public static boolean updateShowTime(int showStatusID, TimeUtils time) {
-		if(Validator.validateShowStatus(showStatusID) ==-1) {
+		if(Validator.validateShowStatus(showStatusID) ==false) {
 			return false;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -128,7 +128,7 @@ public class ShowStatusMgr {
 	
 	
 	public static boolean updateMovieType(int showStatusID, MovieType type) {
-		if(Validator.validateShowStatus(showStatusID) ==-1) {
+		if(Validator.validateShowStatus(showStatusID) ==false) {
 			return false;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -137,7 +137,7 @@ public class ShowStatusMgr {
 	}
 	
 	public static boolean updateSeat(int showStatusID, int row, int col) {
-		if(Validator.validateShowStatus(showStatusID) ==-1) {
+		if(Validator.validateShowStatus(showStatusID) ==false) {
 			return false;
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
@@ -162,7 +162,7 @@ public class ShowStatusMgr {
 		return true;
 	}
 	
-	public static boolean ValidSeat(SeatType type) {
+	private static boolean ValidSeat(SeatType type) {
 		if(type == SeatType.COUPLE_1_T) {
 			return false;
 		}
@@ -175,17 +175,13 @@ public class ShowStatusMgr {
 			return false;
 		}
 		
-		if(type == SeatType.GOLD_T) {
-			return false;
-		}
-		
 		if(type == SeatType.NOT_EXIST) {
 			return false;
 		}
 		
 		return true;
 	}
-	public static SeatType takenSeat(SeatType type) {
+	private static SeatType takenSeat(SeatType type) {
 		if(type == SeatType.COUPLE_1) {
 			return SeatType.COUPLE_1_T;
 		}
@@ -197,11 +193,6 @@ public class ShowStatusMgr {
 		if(type == SeatType.SINGLE) {
 			return SeatType.SINGLE_T;
 		}
-		
-		if(type == SeatType.GOLD) {
-			return SeatType.GOLD_T;
-		}
-		
 		return null;
 	}
 		

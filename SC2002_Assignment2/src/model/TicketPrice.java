@@ -1,6 +1,8 @@
 package model;
 
-public class TicketPrice {
+import java.io.Serializable;
+
+public class TicketPrice implements Serializable{
     private double basePrice;
     private double weekendPrice;
     private double studentDiscount;

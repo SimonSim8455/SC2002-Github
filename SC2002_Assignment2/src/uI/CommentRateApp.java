@@ -63,8 +63,8 @@ public class CommentRateApp {
 			System.out.println("Movie Title: "+movie.getTitle()+"\n");
 			System.out.print("1) Add Comments and Rating\n");
 			System.out.print("2) Update Comments and Rating\n");
-			System.out.print("0) Back to Movie Listing\n");
-			System.out.print("Please Choose Your Action: ");
+			System.out.println("0) Back to Movie Listing\n");
+			System.out.print("Enter Your Choice: ");
 			choice = sc.nextInt();
 			
 			switch(choice)

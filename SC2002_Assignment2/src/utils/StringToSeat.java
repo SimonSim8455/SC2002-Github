@@ -48,24 +48,27 @@ public class StringToSeat {
 	}
 	
 	public static void printSeat(SeatType [][] type) {
-		for(int i =0;i<type[0].length;i++) {
-			System.out.print("===");
-		}
-		System.out.println();
-		int middle = type[0].length/2;
-		int start = middle-4;
-		int end = middle+5;
-		for(int i =0;i<type[0].length;i++) {
-			if(i==start) {
-				System.out.print("| SCREEN |");
-				i = end;
-				continue;
-			}
-			System.out.print("---");
-		}
+//		for(int i =0;i<type[0].length;i++) {
+//			System.out.print("===");
+//		}
+//		System.out.println();
+//		int middle = type[0].length/2;
+//		int start = middle-4;
+//		int end = middle+5;
+//		for(int i =0;i<type[0].length;i++) {
+//			if(i==start) {
+//				System.out.print("| SCREEN |");
+//				i = end;
+//				continue;
+//			}
+//			System.out.print("---");
+//		}
+		
+		System.out.print("===================================\n");
+		System.out.print("____|         SCREEN          |____\n");
 		System.out.println();
 		for(int i=0;i<type.length;i++) {
-			System.out.print(i+"  |");
+			System.out.print(i+"|  ");
 			for(int j=0; j<type[i].length;j++) {
 				SeatType buffer = type[i][j];
 				if(buffer == SeatType.NOT_EXIST) {
@@ -96,25 +99,21 @@ public class StringToSeat {
 					System.out.print(" X]");
 				}
 				
-//				if(buffer == SeatType.GOLD) {
-//					System.out.print("[  ]");
-//				}
-//				
-//				if(buffer == SeatType.GOLD_T) {
-//					System.out.print("[  X ]");
-//				}
 			}
-			System.out.println();
+			System.out.println("  |"+ i);
 		}
-		for(int i =0;i<type[0].length;i++) {
-			System.out.print("===");
-		}
+		System.out.print("\n____________|ENTRANCE|_____________\n");
+		System.out.print("===================================");
+//		for(int i =0;i<type[0].length;i++) {
+//			System.out.print("===");
+//		}
 		System.out.println();
-		System.out.print("   |");
+		System.out.print(" |  ");
 		String alpha = "ABCDEFGHIJKLMNOPQRST";
 		for(int i=0;i<type[0].length;i++) {
 			System.out.print(" "+alpha.charAt(i)+" ");
 		}
+		System.out.print("  |");
 		System.out.println();
 	}
 }

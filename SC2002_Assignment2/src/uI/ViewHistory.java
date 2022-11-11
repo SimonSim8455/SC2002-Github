@@ -86,10 +86,10 @@ public class ViewHistory {
 			Cineplex cineplex =  CineplexMgr.getCineplexByID(show.getCineplexID());
 			UserAccount user = UserAccountMgr.getUserAccount(AppState.getUserID());
 			
-			System.out.println("Booking: "+i);
+			System.out.println((i+1)+")");
 			System.out.println("Movie Title: "+movie.getTitle());
 			System.out.println("Movie Type: "+show.getMovieType());
-			System.out.println("Cinema ID: "+cinema.getCinemaID());
+			System.out.println("Cinema Code: "+cinema.getCinemaCode());
 			System.out.println("Cinema Class: "+cinema.getCinemaType());
 			System.out.println("Cineplex Name: "+cineplex.getName());
 			

@@ -1,5 +1,6 @@
 package manager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.Data;
@@ -11,12 +12,9 @@ import utils.Validator;
 public class CineplexMgr {
 	private static HashMap<Integer,Cineplex> cineplexList =  Data.cineplexList;
 	
-	public static HashMap<Integer,Cineplex> getCineplexList(){
-		return cineplexList;
-	}
 	
 	public static boolean createCineplex(String name) {
-		if(Validator.validateCineplex(name)!= -1) {
+		if(Validator.validateCineplex(name)  == true) {
 			return false;
 		}
 		int cineplexID = Helper.getUniqueId(cineplexList);
@@ -26,7 +24,7 @@ public class CineplexMgr {
 	}
 	
 	public static Cineplex getCineplexByID(int cineplexID) {
-		if(Validator.validateCineplex(cineplexID)!= 1) {
+		if(Validator.validateCineplex(cineplexID) == false) {
 			return null;
 		}
 		Cineplex buffer = SearchUtils.searchCineplex(cineplexID);
@@ -34,7 +32,7 @@ public class CineplexMgr {
 	}
 	
 	public static Cineplex getCineplexByName(String name) {
-		if(Validator.validateCineplex(name) != 1) {
+		if(Validator.validateCineplex(name) ==false ) {
 			return null;
 		}
 		for(Cineplex buffer : cineplexList.values()) {
@@ -44,5 +42,12 @@ public class CineplexMgr {
 		}
 		return null;
 	}
-
+	
+	public static ArrayList<Cineplex> getCineplexList(){
+		ArrayList<Cineplex> list = new ArrayList<Cineplex>();
+		for(Cineplex buffer : cineplexList.values()) {
+			list.add(Cineplex.copy(buffer));
+		}
+		return list;
+	}
 }

@@ -19,6 +19,7 @@ import manager.TicketPriceMgr;
 import manager.UserAccountMgr;
 import model.*;
 import utils.DateUtils;
+import utils.Helper;
 import utils.SearchUtils;
 import utils.TimeUtils;
 import utils.Validator;
@@ -54,9 +55,55 @@ public class Printer {
 		System.out.println();
 	}
 	
+	public static ArrayList<Movie> displayAllMovieTitle(){
+		ArrayList<Movie> movieList = MovieMgr.getAllMovieList();
+		if(movieList.size() ==0) {
+			System.out.print("\nShowTime Is Empty\n");
+			return movieList;
+		}
+		for(int i=0;i<movieList.size();i++) {
+			Movie movie = movieList.get(i);
+			System.out.print((i+1)+")  ");
+			System.out.println(movie.getTitle());
+		}
+		return movieList;
+	}
+	
+	public static ArrayList<ShowStatus> displayAllMovieShowTime() {
+		ArrayList<ShowStatus> showStatusList = ShowStatusMgr.getAllStatusList();
+		if(showStatusList.size() ==0) {
+			System.out.print("\nShowTime Is Empty\n");
+			return showStatusList;
+		}
+		for(int i=0;i<showStatusList.size();i++) {
+			Movie movie = MovieMgr.getMovieByID(showStatusList.get(i).getMovieID());
+			TimeUtils showtime = showStatusList.get(i).getShowTime();
+			DateUtils showDate = showStatusList.get(i).getShowDate();
+			int cineplexID = showStatusList.get(i).getCineplexID();
+			int cinemaID = showStatusList.get(i).getCinemaID();
+			Cinema cinema = CinemaMgr.getCinemaByID(cinemaID);
+			ShowStatus status = showStatusList.get(i);
+			Cineplex cineplex = CineplexMgr.getCineplexByID(cineplexID);
+			
+			System.out.println("\n"+(i+1)+")");
+			System.out.println("Movie Title: "+movie.getTitle());
+			System.out.println("MovieType: "+status.getMovieType());
+			System.out.println("Cineplex Name: "+cineplex.getName());
+			System.out.println("Cinema Code: "+cinema.getCinemaCode());
+			System.out.println("Cinema Class: "+cinema.getCinemaType());
+			System.out.print("ShowDate: ");
+			DateUtils.print(showDate);
+			System.out.println();
+			System.out.print("ShowTime: ");
+			TimeUtils.print(showtime);
+			System.out.println("\n");
+		}
+		return showStatusList;
+		
+	}
 	
 	public static ArrayList<ShowStatus> displaytMovieShowTime(int movieID) {
-		System.out.println("Available Show Time:\n");
+		System.out.println("Available Show Time:");
 		ArrayList<ShowStatus> showStatusList = ShowStatusMgr.getAllStatusListByMovieID(movieID);
 		if(showStatusList.size() ==0) {
 			System.out.print("\nShowTime Is Empty\n");
@@ -76,7 +123,7 @@ public class Printer {
 			System.out.println("Movie Title: "+movie.getTitle());
 			System.out.println("MovieType: "+status.getMovieType());
 			System.out.println("Cineplex Name: "+cineplex.getName());
-			System.out.println("Cinema ID: "+cinemaID);
+			System.out.println("Cinema Code: "+cinema.getCinemaCode());
 			System.out.println("Cinema Class: "+cinema.getCinemaType());
 			System.out.print("ShowDate: ");
 			DateUtils.print(showDate);
@@ -85,12 +132,11 @@ public class Printer {
 			TimeUtils.print(showtime);
 			System.out.println("\n");
 		}
-		
 		return showStatusList;
-	
 	}
 	
 	public static void displayCasts(int movieID) {
+		System.out.println("Casts: ");
 		ArrayList<String> casts = MovieMgr.getCastsByMovieID(movieID);
 		for(int i=0;i<casts.size();i++) {
 			System.out.print(casts.get(i)+", ");
@@ -114,7 +160,7 @@ public class Printer {
 	}
 	
 	//0 no sort, 1--> sales, 2-->rating
-	public static void displayMovie(int key, int limit, int show) {
+	public static void displayMovie(int key, int limit) {
 		ArrayList<MovieRank> movieRankList = MovieRankMgr.getAllMovieRankList();
 		List<MovieRank> arr = new ArrayList<>();
 		for(int i=0;i<movieRankList.size();i++) {
@@ -133,7 +179,7 @@ public class Printer {
 				if(i>=arr.size())return;
 				Movie movie = MovieMgr.getMovieByID(arr.get(i).getMovieID());
 				System.out.println(i+1+") " + movie.getTitle());
-				System.out.println("   Total Sales: "+arr.get(i).getSales());
+				System.out.println("   Total Sales: "+arr.get(i).getSales()+"\n");
 			}
 		}
 		else if (key==2) {
@@ -148,7 +194,8 @@ public class Printer {
 				if(i>=arr.size())return;
 				Movie movie = MovieMgr.getMovieByID(arr.get(i).getMovieID());
 				System.out.println(i+1+") " + movie.getTitle());
-				System.out.println("   Overall Rating: "+arr.get(i).getOverallRating());
+				String overall =  String.format("%.1f", arr.get(i).getOverallRating());
+				System.out.println("   Overall Rating: "+overall+"\n");
 			}
 		}	
 	}
@@ -223,10 +270,52 @@ public class Printer {
 				System.out.println(" Rating: NA");
 			}
 			if(buffer.getComment() != null) {
-				System.out.println("   Comment: "+buffer.getComment());
+				System.out.println("   Comment: "+buffer.getComment()+"\n");
 			}else {
-				System.out.println("   Comment: NA");
+				System.out.println("   Comment: NA\n");
 			}
+		}
+	}
+	
+	//book =0, view =1
+	public static int SearchMovie(Scanner sc, String str, int bookView) {
+		String input;
+		sc.nextLine();
+		while(true) {
+			System.out.print("\nEnter movie title: ");
+			input = sc.nextLine();
+			ArrayList<Movie> result = new ArrayList<Movie>();
+			if(bookView ==0) {
+				result = Helper.SearchResultsForBooking(input);
+			}else {
+				result =Helper.SearchResultsForViewing(input);
+			}
+			if(result.size() == 0) {
+				System.out.println("\nNo Movie Found\n");
+				return -1;
+			}
+			System.out.println("\nSearch Results:\n");
+			for(int j=0;j<result.size();j++) {
+				System.out.println(j+1+") "+result.get(j).getTitle());
+			}
+			int resultIndex;
+			System.out.println();
+			while(true) {	
+				System.out.print("Please Enter Movie ID "+str+"(or enter 0 to quit): ");
+				resultIndex = sc.nextInt() -1;
+				sc.nextLine();
+				if(resultIndex <= -1) {
+					return -1;
+				}
+				if(resultIndex>= result.size()) {
+					System.out.println("Please choose a valid ID "+ str+ "\n");
+				}else {
+					break;
+				}
+			}
+			Movie movie = result.get(resultIndex);
+			Printer.displayMovieDetails(movie.getMovieID());
+			return movie.getMovieID();
 		}
 	}
 }

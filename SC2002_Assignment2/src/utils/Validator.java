@@ -6,208 +6,140 @@ import database.Data;
 import model.*;
 
 public class Validator {
-	//  Global return value doc:
-	/*  -1: Cannot be found
-	 *   0: Found but Not Valid/OnGoing Status
-	 *	 1: Found and Valid
-	 *	 
-	 */
-	
-	//
-	
-	
-	public static int validateReview(int userID, int movieID) {
+	// 1 if review exist in the movie
+	public static boolean validateReview(int userID, int movieID) {
 		ArrayList<Integer> reviewIDs = SearchUtils.ReviewIDListByID(userID, 0);
 		HashMap<Integer, MovieReview> reviewList = Data.movieReviewList;
 		for(int i=0;i<reviewIDs.size();i++) {
 			MovieReview buffer = reviewList.get(reviewIDs.get(i));
 			if(buffer.getMovieID() == movieID) {
-				return 0;
+				return true;
 			}
 		}
-		return 1;
+		return false;
 	}
-	public static int validateBooking(int id) {
+	
+	// 1 if exist
+	public static boolean validateBooking(int id) {
 		Booking buffer = SearchUtils.searchBooking(id);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
-	public static int validateMovieRank(int Movieid) {
+	
+	// 1 if exist
+	public static boolean validateMovieRank(int Movieid) {
 		MovieRank buffer = SearchUtils.searchMovieRankByMovieID(Movieid);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
-	
-	public static int validateBookingList(int userID, ArrayList<Integer> list) {
-		for(int i=0;i<list.size();i++) {
-			Booking buffer = SearchUtils.searchBooking(list.get(i));
-			if(buffer == null) {
-				return -1;
-			}
-			if(buffer.getUserID() != userID) {
-				return 0;
-			}
-		}
-		return 1;
-	}
-	
-	public static int validateReviewList(int userID, ArrayList<Integer> list) {
-		for(int i=0;i<list.size();i++) {
-			MovieReview buffer = SearchUtils.searchMovieReview(list.get(i));
-			if(buffer == null) {
-				return -1;
-			}
-			if(buffer.getUserID() != userID) {
-				return 0;
-			}
-		}
-		return 1;
-	}
-	
-	public static int validateMovieReview(int reviewID) {
+
+	//1 if exist
+	public static boolean validateMovieReview(int reviewID) {
 		MovieReview buffer = SearchUtils.searchMovieReview(reviewID);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateMovie(int movieID) {
+	//1 if exist
+	public static boolean validateMovie(int movieID) {
 		Movie buffer = SearchUtils.searchMovie(movieID);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		
-		if(buffer.getMovieState() == MovieStates.NO_LONGER_SHOWING) {
-			return 0;
-		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateMovie(String movieName) {
+	public static boolean validateMovie(String movieName) {
 		Movie buffer = SearchUtils.searchMovie(movieName);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		
-		if(buffer.getMovieState() == MovieStates.NO_LONGER_SHOWING) {
-			return 0;
-		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateHoliday(int holidayID) {
+	public static boolean validateHoliday(int holidayID) {
 		Holiday buffer = SearchUtils.searchHoliday(holidayID);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateHoliday(String name, DateUtils date) {
+	public static boolean validateHoliday(String name, DateUtils date) {
 		Holiday buffer = SearchUtils.searchHoliday(name,date);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	// cinema Must be created before adding into Cineplex
-	public static int validateCinemaList(int cineplexID, ArrayList<Integer> list) {
-		for(int i=0;i<list.size();i++) {
-			Cinema buffer = SearchUtils.searchCinema(list.get(i));
-			if(buffer == null) {
-				return -1;
-			}
-			if(buffer.getCineplexID() != cineplexID) {
-				return 0;
-			}
-		}
-		return 1;
-	}
-	
-	public static int validateCinema(int cinemaID) {
+	public static boolean validateCinema(int cineplexID,int cinemaID) {
 		Cinema buffer = SearchUtils.searchCinema(cinemaID);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		HashMap<Integer,Cinema> cinemaList = Data.cinemaList;
-		if(Validator.validateCineplex(buffer.getCineplexID()) ==-1) {
-			cinemaList.remove(cinemaID);
-			return 0;
+		if(buffer.getCineplexID() != cineplexID) {
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateCineplex(int cineplexID) {
+	public static boolean validateCineplex(int cineplexID) {
 		Cineplex buffer = SearchUtils.searchCineplex(cineplexID);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateCineplex(String cineplexName) {
+	public static boolean validateCineplex(String cineplexName) {
 		Cineplex buffer = SearchUtils.searchCineplex(cineplexName);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateUser(String username) {
+	public static boolean validateUser(String username) {
 		UserAccount buffer = SearchUtils.searchUserAccount(username);
 		if(buffer==null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateUser(int userID) {
+	public static boolean validateUser(int userID) {
 		UserAccount buffer = SearchUtils.searchUserAccount(userID);
 		if(buffer==null) {
-			return -1;
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public static int validateShowStatus(int showStatusID) {
+	public static boolean validateShowStatus(int showStatusID) {
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
 		if(buffer == null) {
-			return -1;
+			return false;
 		}
-		
-		HashMap<Integer,ShowStatus> showStatusList = Data.showStatusList;
-		if(Validator.validateCineplex(buffer.getCineplexID()) ==-1) {
-			showStatusList.remove(showStatusID);
-			return 0;
-		}
-		if(Validator.validateCinema(buffer.getCinemaID()) == -1) {
-			showStatusList.remove(showStatusID);
-			return 0;
-		}
-		
-		return 1;
+		return true;
 	}
 	
-	//ShowStatus must always be created b4 adding into CinemaList
-	public static int validateShowStatusList(int cineplexID, int cinemaID, ArrayList<Integer> list) {
-		for(int i=0;i<list.size();i++) {
-			ShowStatus buffer = SearchUtils.searchShowStatus(list.get(i));
-			if(buffer == null) {
-				return -1;
-			}
-			if(buffer.getCineplexID() != cineplexID) {
-				return 0;
-			}
-			if(buffer.getCinemaID() != cinemaID) {
-				return 0;
+	public static boolean validateCinema(int cineplexID, String cinemaCode) {
+		HashMap<Integer,Cinema> list = Data.cinemaList;
+		for(Cinema buffer: list.values()) {
+			if(buffer.getCineplexID() == cineplexID) {
+				String name = buffer.getCinemaCode();
+				if(name.equals(cinemaCode)) {
+					return true;
+				}
 			}
 		}
-		return 1;
+		return false;
 	}
 }

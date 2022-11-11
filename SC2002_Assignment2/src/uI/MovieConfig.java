@@ -18,19 +18,38 @@ public class MovieConfig {
 		
 		while(true) {
 			int a;
-			System.out.print("\n1: Add New Movie\n");
-			System.out.print("2: View Movie List\n");
-			System.out.print("0: Back to Main Menu\n");
+			System.out.print("\n========================================\n");
+			System.out.print("           Staff Movie Listing            \n");
+			System.out.print("========================================\n");
+			System.out.print("1) View All Movie List\n");
+			System.out.print("2) View Top 5 Movie By Sales\n");
+			System.out.print("3) View Top 5 Movie By Overall Rating\n");
+			System.out.print("4) Create Movie Listing\n");
+			System.out.print("5) Remove Movie Listing\n");
+			System.out.print("6) Update Movie Listing\n");
+			System.out.println("0) Back to Main Menu\n");
 			System.out.print("Please Choose Your Action: ");
 			a = sc.nextInt();
 			switch(a) {
 				case 0:
 					return;
 				case 1:
-					AddNewMovie(sc);
+					Printer.displayAllMovie(1);
 					break;
 				case 2:
-					ViewMovieList(sc);
+					Printer.displayMovie(1, 5);
+					break;
+				case 3:
+					Printer.displayMovie(2, 5);
+					break;
+				case 4:
+					AddNewMovie(sc);
+					break;
+				case 5:
+					RemoveMovie(sc);
+					break;
+				case 6:
+					updateMovie(sc);
 					break;
 				default:
 					break;
@@ -39,38 +58,60 @@ public class MovieConfig {
 		}
 	}
 	
+	private static void RemoveMovie(Scanner sc) {
+		ArrayList<Movie> list = Printer.displayAllMovieTitle();
+		System.out.println();
+		System.out.print("Enter A Movie ID To Remove (or enter 0 to return): ");
+		int index = sc.nextInt() -1;
+		if(index>=list.size() || index<0) {
+			return;
+		}
+		int movieID = list.get(index).getMovieID();
+		boolean a = MovieMgr.removeMovie(movieID);
+		if(!a) {
+			System.out.print("Fail To Remove Movie\n");
+			return;
+		}
+		System.out.print("Successfully Removed\n");
+	}
+	
 	public static void AddNewMovie(Scanner sc) {
+		
+		String title = "", director = "", movieContent = "";
+		ArrayList<String> casts =new ArrayList<String>();
+		int duration, stateID;
+		MovieStates state = MovieStates.NOW_SHOWING;
+		
 		sc.nextLine();
-		System.out.print("Title: ");
-		String title = sc.nextLine();
+		System.out.print("\nEnter Movie Title: ");
+		title = sc.nextLine();
 		
-		System.out.print("Director: ");
-		String director = sc.nextLine();
+		System.out.print("\nEnter Movie Director: ");
+		director = sc.nextLine();
 		
-		System.out.print("Cast 1: ");
-		String cast1 = sc.nextLine();
+		System.out.print("\nEnter Number of Movie Casts: ");
+		int num = sc.nextInt();
+		sc.nextLine();
+		String castName ="";
+		for(int i=0;i<num;i++) {
+			System.out.printf("Cast %d: ",i+1);
+			castName = sc.nextLine();
+			casts.add(castName);
+		}
 		
-		System.out.print("Cast 2: ");
-		String cast2 = sc.nextLine();
+		System.out.print("\nEnter Sypnopsis: ");
+		movieContent= sc.nextLine();
 		
-		ArrayList<String> casts = new ArrayList<String>();
-		casts.add(cast1);
-		casts.add(cast2);
-		
-		System.out.print("Sypnopsis: ");
-		String movieContent= sc.nextLine();
-		
-		System.out.print("Duration: ");
-		int duration= sc.nextInt();
+		System.out.print("\nEnter Duration: ");
+		duration= sc.nextInt();
 		sc.nextLine();
 		
-		System.out.print("MovieState:\n");
-		System.out.print("1: COMING SOON  ");
-		System.out.print("2: NOW SHOWING  ");
-		System.out.println("3: NO_LONGER_SHOWING  ");
-		System.out.print("Status ID: ");
-		int stateID= sc.nextInt();
-		MovieStates state;
+		System.out.print("\nShowing Status:\n");
+		System.out.print("1) COMING SOON  \n");
+		System.out.print("2) NOW SHOWING  \n");
+		System.out.println("3) NO_LONGER_SHOWING  \n");
+		System.out.print("Enter Status ID: ");
+		stateID= sc.nextInt();
 		switch(stateID) {
 			case 1:
 				state = MovieStates.COMING_SOON;
@@ -95,73 +136,50 @@ public class MovieConfig {
 		}
 	}
 
-	public static void ViewMovieList(Scanner sc) {
-		while(true) {
-			int a =-1;
-			System.out.print("\n1: View and Update Movies\n");
-			System.out.print("2: View Top 5 Ticket Sales\n");
-			System.out.print("3: view Top 5 overall Rating\n");
-			System.out.print("0: go back\n");
-			System.out.print("Please Choose Your Action: ");
-			a = sc.nextInt();
-			switch(a) {
-				case 0:
-					return;
-				case 1:
-					chooseMoviePrompt(sc) ;
-					break;
-				case 2:
-					Printer.displayMovie(1, 5, 1);
-					break;
-				case 3:
-					Printer.displayMovie(2, 5, 1);
-					break;
-				default:
-					break;
-			}
+	private static void updateMovie(Scanner sc) {
+		ArrayList<Movie> list = Printer.displayAllMovieTitle();
+		System.out.println();
+		System.out.print("Enter A Movie ID To Edit (or enter 0 to return): ");
+		int index = sc.nextInt() -1;
+		if(index>=list.size() || index<0) {
+			return;
 		}
+		int movieID = list.get(index).getMovieID();
+		if(movieID ==-1) {
+			return;
+		}
+		configMovie(sc,movieID);
+		return;
 	}
 	
-	public static void chooseMoviePrompt(Scanner sc) {
-		int id;
-		do {
-			System.out.print("\nChoose a movieID to update (or enter -1 to quit: ");
-			id = sc.nextInt();
-			Movie movie = MovieMgr.getMovieByID(id);
-			if(movie == null) {
-				System.out.print("Movie cant be found, please try again\n");
-			}else {
-				configMovie(sc,id);
-				return;
-			}
-		}while(id>=0);
-	}
-	
-
 	public static void configMovie(Scanner sc ,int movieID) {
-		Printer.displayMovieDetails(movieID);
-		int a;
 		do {
-			System.out.print("\n1: Update Title \n");
-			System.out.print("2: Update Director\n");
-			System.out.print("3: Update synopesis\n");
-			System.out.print("4: Update casts\n");
-			System.out.print("5: Update duration\n");
-			System.out.print("6: Update Movie states\n");
-			System.out.print("0: go back\n");
-			System.out.print("Please Choose Your Action: ");
-			a = sc.nextInt();
-			switch(a) {
+			int choice =-1;
+			System.out.print("\n========================================\n");
+			System.out.print("          Update Movie Listing            \n");
+			System.out.print("========================================\n");
+			Movie movie = MovieMgr.getMovieByID(movieID);
+			System.out.println("Movie Title: "+movie.getTitle()+"\n");
+			System.out.print("1) Update Title \n");
+			System.out.print("2) Update Director\n");
+			System.out.print("3) Update Sypnopsis\n");
+			System.out.print("4) Update casts\n");
+			System.out.print("5) Update duration\n");
+			System.out.print("6) Update Movie State\n");
+			System.out.println("0) Go back\n");
+			System.out.print("Enter Your Choice: ");
+			choice = sc.nextInt();
+			switch(choice) {
 				case 0:
 					return;
 				case 1:
-					updateMovieString(sc,movieID,a);
+					updateMovieString(sc,movieID,1);
 					break;
 				case 2:
-					updateMovieString(sc,movieID,a);
+					updateMovieString(sc,movieID,2);
 					break;
 				case 3:
-					updateMovieString(sc,movieID,a);
+					updateMovieString(sc,movieID,3);
 					break;
 				case 4:
 					updateCast(sc, movieID);
@@ -181,11 +199,16 @@ public class MovieConfig {
 	public static void updateCast(Scanner sc, int movieID) {
 		int choice;
 		do {
-			System.out.print("\n1: View casts: \n");
-			System.out.print("2: Add casts\n");
-			System.out.print("3: Remove Casts\n");
-			System.out.print("0: go back\n");
-			System.out.print("Please Choose Your Action: ");
+			System.out.print("\n========================================\n");
+			System.out.print("            Update Movie Casts            \n");
+			System.out.print("========================================\n");
+			Movie movie = MovieMgr.getMovieByID(movieID);
+			System.out.println("Movie Title: "+movie.getTitle()+"\n");
+			System.out.print("1) View casts\n");
+			System.out.print("2) Add casts\n");
+			System.out.print("3) Remove Casts\n");
+			System.out.println("0) Go Back\n");
+			System.out.print("Enter Your Choice: ");
 			
 			choice = sc.nextInt();
 			String castName;
@@ -193,21 +216,22 @@ public class MovieConfig {
 				case 0:
 					return;
 				case 1:
-					System.out.print("Casts: ");
 					Printer.displayCasts(movieID);
 					System.out.println();
 					break;
 				case 2:
-					System.out.print("Cast Name to be added: ");
+					System.out.print("\nEnter Cast Name to be added: ");
 					sc.nextLine();
 					castName = sc.nextLine();
 					MovieMgr.addCasts(movieID, castName);
+					System.out.print("Sucessfully Updated\n");
 					break;
 				case 3:
-					System.out.print("Cast Name to be removed: ");
+					System.out.print("\nEnter Cast Name to be removed: ");
 					sc.nextLine();
 					castName = sc.nextLine();
 					MovieMgr.removeCasts(movieID, castName);
+					System.out.print("Sucessfully Updated\n");
 					break;
 				default:
 					break;
@@ -218,41 +242,47 @@ public class MovieConfig {
 	public static void updateMovieString(Scanner sc, int movieID, int action) {
 		sc.nextLine();
 		if(action ==1) {
-			System.out.print("New Title: ");
+			System.out.print("\nEnter New Movie Title: ");
 			String str;
 			str = sc.nextLine();
 			MovieMgr.updateMovieTitle(movieID, str);
+			System.out.print("Sucessfully Updated\n");
 			return;
 		}
 		if(action == 2) {
-			System.out.print("New Dirctor: ");
+			System.out.print("\nEnter New Movie Dirctor: ");
 			String str;
 			str = sc.nextLine();
 			MovieMgr.updateMovieDirector(movieID, str);
+			System.out.print("Sucessfully Updated\n");
 			return;
 		}
 		if(action ==  3) {
-			System.out.print("New Synopsis: ");
+			System.out.print("\nEnter New Movie Synopsis: ");
 			String str;
 			str = sc.nextLine();
 			MovieMgr.updateMovieContent(movieID, str);
+			System.out.print("Sucessfully Updated\n");
 			return;
 		}
 	}
 	
 	public static void updateDuration(Scanner sc, int movieID) {
-		System.out.print("New Duaration: ");
+		System.out.print("\nEnter New Duaration: ");
 		int duration = sc.nextInt();
 		MovieMgr.updateMovieDuration(movieID, duration);
+		System.out.print("Sucessfully Updated\n");
 		return;
 	}
 	
 	public static void updateMovieState(Scanner sc, int movieID) {
-		System.out.print("1: COMING SOON  ");
-		System.out.print("2: NOW SHOWING  ");
-		System.out.println("3: NO_LONGER_SHOWING  ");
-		System.out.print("New Status ID: ");
+		System.out.print("\nShowing Status:\n");
+		System.out.print("1) COMING SOON  \n");
+		System.out.print("2) NOW SHOWING  \n");
+		System.out.println("3) NO_LONGER_SHOWING  \n");
+		System.out.print("Enter New Status ID: ");
 		int id = sc.nextInt();
+		sc.nextLine();
 		switch(id){
 			case 1: 
 				MovieMgr.updateMovieState(movieID,MovieStates.COMING_SOON);
@@ -264,14 +294,11 @@ public class MovieConfig {
 				MovieMgr.updateMovieState(movieID,MovieStates.NO_LONGER_SHOWING );
 				break;
 			default:
-				System.out.print("Invalid input\n");
+				System.out.println("Invalid input\n");
 				return;
 		}
+		System.out.print("Sucessfully Updated\n");
 		
 	}
 	
-
-
-	
-
 }
