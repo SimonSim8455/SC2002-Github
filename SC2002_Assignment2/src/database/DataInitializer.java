@@ -33,14 +33,14 @@ public class DataInitializer {
 	
 	private static void intitializeTicketPrice() {
 		Data.ticketPrice = new TicketPrice(
-				10, //Base
-				1, //WeekEnd 
-				2, //StudentDiscount
-				3, // ElderlyDiscount
+				9.5, //Base
+				1.5, //WeekEnd 
+				2.5, //StudentDiscount
+				5.5, // ElderlyDiscount
 				4, // GoldClassTicket
-				5, //CoupleClassTicket
-				6, //Movie2DPrice
-				7, //Movie3DPrice
+				5, //Couple Seat Ticket
+				0, //Movie2DPrice
+				5.5, //Movie3DPrice
 				8, //MovieIMAXPrice
 				9, //MoviePlatinium
 				10 //HolidayPrice
@@ -110,11 +110,11 @@ public class DataInitializer {
 				//state
 				MovieStates.NOW_SHOWING,
 				//number of Raters
-				0,
+				10,
 				//Overall Rating
-				0,
+				3,
 				//Sales
-				0
+				100
 		);
 		
 		
@@ -137,11 +137,11 @@ public class DataInitializer {
 				//state
 				MovieStates.NOW_SHOWING,
 				//number of Raters
-				0,
+				1,
 				//Overall Rating
-				0,
+				5,
 				//Sales
-				0
+				10
 		);
 		
 		casts = new ArrayList<String>();
@@ -163,11 +163,11 @@ public class DataInitializer {
 				//state
 				MovieStates.COMING_SOON,
 				//number of Raters
-				0,
+				13,
 				//Overall Rating
-				0,
+				4.5,
 				//Sales
-				0
+				140
 		);
 		
 		
@@ -255,11 +255,11 @@ public class DataInitializer {
 	
 	private static void initializeCinema() {
 		String [] plan1 = new String[5];
-		plan1[0] = "      [ ][ ]   [ ][ ][ ]";
-		plan1[1] = "[ ][ ][ ][ ]   [ ][ ][ ]";
-		plan1[2] = "[ ][ ][ ][ ]   [ ][ ][ ]";
-		plan1[3] = "[ ][ ][ ][ ]   [ ][ ][ ]";	
-		plan1[4] = "[ ][ ][ ][ ]   [ ][ ][ ]";
+		plan1[0] = "      [ ][ ]   [ ][ ][ ][ ]";
+		plan1[1] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan1[2] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan1[3] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";	
+		plan1[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
 		SeatType [][] seatPlan1 = StringToSeat.strToSeatType(plan1);
 		CinemaType type1 = CinemaType.NORMAL;
 		CinemaMgr.createCinema(0,type1, seatPlan1, "001");
@@ -299,56 +299,56 @@ public class DataInitializer {
 		
 		
 		String [] plan5 = new String[5];
-		plan5[0] = "      [ ][ ]   [ ][ ][ ]";
-		plan5[1] = "[ ][ ][ ][ ]   [ ][ ][ ]";
-		plan5[2] = "[ ][ ][ ][ ]   [ ][ ][ ]";
-		plan5[3] = "[ ][ ][ ][ ]   [ ][ ][ ]";	
-		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ]";
-		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ]";
-		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ]";
+		plan5[0] = "      [ ][ ]   [ ][ ][ ][ ]";
+		plan5[1] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan5[2] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan5[3] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";	
+		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan5[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
 		SeatType [][] seatPlan5 = StringToSeat.strToSeatType(plan5);
 		CinemaType type5 = CinemaType.NORMAL;
 		CinemaMgr.createCinema(1,type5, seatPlan5, "005");
 		
 		
 		String [] plan6 = new String[5];
-		plan6[0] = "      [ ][ ][ ][ ][ ][ ]";
-		plan6[1] = "[ ][ ][ ][ ]      [ ][ ]";
-		plan6[2] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
-		plan6[3] = "[ ][ ][ ][ ][ ][ ][ ][ ]";	
-		plan6[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
+		plan6[0] = "      [ ][ ]   [ ][ ][ ][ ]";
+		plan6[1] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan6[2] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan6[3] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";	
+		plan6[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
 		SeatType [][] seatPlan6 = StringToSeat.strToSeatType(plan6);
 		CinemaType type6 = CinemaType.PLATINIUM;
 		CinemaMgr.createCinema(1,type6, seatPlan6, "006");
 		
 		
 		String [] plan7 = new String[5];
-		plan7[0] = "      [ ][ ][ ][ ][ ][ ]";
-		plan7[1] = "[ ][ ][ ][ ]      [ ][ ]";
-		plan7[2] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
-		plan7[3] = "[ ][ ][ ][ ][ ][ ][ ][ ]";	
-		plan7[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
+		plan7[0] = "      [ ][ ]   [ ][ ][ ][ ]";
+		plan7[1] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan7[2] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan7[3] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";	
+		plan7[4] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
 		SeatType [][] seatPlan7 = StringToSeat.strToSeatType(plan7);
 		CinemaType type7 = CinemaType.NORMAL;
 		CinemaMgr.createCinema(2,type7, seatPlan7, "007");
 		
 		String [] plan8 = new String[5];
-		plan8[0] = "      [ ][ ][ ][ ][ ][ ]";
-		plan8[1] = "[ ][ ][ ][ ]      [ ][ ]";
-		plan8[2] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
-		plan8[3] = "[ ][ ][ ][ ][ ][ ][ ][ ]";	
-		plan8[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
+		plan8[0] = "      [ ][ ]   [ ][ ][ ][ ]";
+		plan8[1] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan8[2] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan8[3] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";	
+		plan8[4] = "[ ][ ][    ]   [    ][ ][ ]";
 		SeatType [][] seatPlan8 = StringToSeat.strToSeatType(plan8);
 		CinemaType type8 = CinemaType.NORMAL;
 		CinemaMgr.createCinema(2,type8, seatPlan8, "008");
 		
 		
 		String [] plan9 = new String[5];
-		plan9[0] = "      [ ][ ][ ][ ][ ][ ]";
-		plan9[1] = "[ ][ ][ ][ ]      [ ][ ]";
-		plan9[2] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
-		plan9[3] = "[ ][ ][ ][ ][ ][ ][ ][ ]";	
-		plan9[4] = "[ ][ ][ ][ ][ ][ ][ ][ ]";
+		plan9[0] = "      [ ][ ]   [ ][ ][ ][ ]";
+		plan9[1] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan9[2] = "[ ][ ][ ][ ]   [ ][ ][ ][ ]";
+		plan9[3] = "[    ][    ]   [    ][    ]";	
+		plan9[4] = "[    ][    ]   [    ][    ]";
 		SeatType [][] seatPlan9 = StringToSeat.strToSeatType(plan9);
 		CinemaType type9 = CinemaType.PLATINIUM;
 		CinemaMgr.createCinema(2,type9, seatPlan9, "009");

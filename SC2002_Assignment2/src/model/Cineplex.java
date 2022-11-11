@@ -3,7 +3,11 @@ package model;
 import java.io.Serializable;
 
 public class Cineplex implements Serializable{
-    private int cineplexID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int cineplexID;
     private String name;
     
     

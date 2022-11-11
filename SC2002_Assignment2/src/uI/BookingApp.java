@@ -73,7 +73,7 @@ public class BookingApp {
 			}
 		}
 		
-		double price = PriceCalculator.calculate(cinema.getCinemaType(), buffer.getseatStatus()[j][i], user.getAge(), 
+		double price = PriceCalculator.calculate(cinema.getCinemaType(), buffer.getseatStatus()[i][j], user.getAge(), 
 				buffer.getShowDate(),buffer.getMovieType());
 		
 		LocalDate bookDate = LocalDate.now();

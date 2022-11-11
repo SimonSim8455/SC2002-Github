@@ -32,27 +32,29 @@ public class Printer {
 		System.out.println("Weekend Price: "+buffer.getWeekendPrice());
 		System.out.println("Student Discount: "+buffer.getStudentDiscount());
 		System.out.println("Elderly Discount: "+buffer.getElderlyDiscount());
-		System.out.println("GoldClassTicket: "+buffer.getGoldClassTicket());
 		System.out.println("CoupleTicket: "+buffer.getCoupleClassTicket());
 		System.out.println("Movie2DPrice: "+buffer.getMovie2DPrice());
 		System.out.println("Movie3DPrice: "+buffer.getMovie3DPrice());
 		System.out.println("MovieIMAXPrice: "+buffer.getMovieIMAXPrice());
-		System.out.println("PlatiniumPrice: "+buffer.getPlatiniumPrice());
+		System.out.println("GoldClassPrice: "+buffer.getGoldClassTicket());
+		System.out.println("PlatiniumClassPrice: "+buffer.getPlatiniumClassPrice());
 		System.out.println("HolidayPrice: "+buffer.getHolidayPrice());
 	}
 	
 	public static void displayHolidayList() {
 		ArrayList<Holiday> list = HolidayMgr.getAllHolidayList();
+		System.out.println();
 		for(int i =0;i<list.size();i++) {
 			Holiday holiday = list.get(i);
 			System.out.print("Holiday ID: ");
-			System.out.print(holiday.getHolidayID());
+			System.out.println(holiday.getHolidayID());
 			System.out.print("Holiday Name: ");
-			System.out.print(holiday.getHolidayName());
+			System.out.println(holiday.getHolidayName());
 			System.out.print("Holiday Date: ");
 			DateUtils.print(holiday.getHolidayDate());
+			System.out.println();
+			System.out.println();
 		}
-		System.out.println();
 	}
 	
 	public static ArrayList<Movie> displayAllMovieTitle(){

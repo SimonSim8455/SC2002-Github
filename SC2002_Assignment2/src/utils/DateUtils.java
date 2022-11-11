@@ -4,16 +4,43 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Act as a Container that store date and some useful function
+ * @author Sim 
+ *
+ */
 public class DateUtils implements Serializable{
+	/**
+	 *  day of Date
+	 */
     private int day;
+    /**
+     * month of date
+     */
     private int month;
+    /**
+     * year of date
+     */
     private int year;
     
+    /**
+     * Construct for date
+     * @param day
+     * @param month
+     * @param year
+     */
     public DateUtils(int day, int month, int year) {
     	this.day = day;
     	this.month =month;
     	this.year = year;
     }
+    
+    /**
+     * check whether two instance of date is equal
+     * @param date1
+     * @param date2
+     * @return {@code true} if equal
+     */
     public static boolean equal(DateUtils date1, DateUtils date2) {
     	boolean a = date1.getDay() != date2.getDay();
     	boolean b = date1.getMonth() != date2.getMonth();
@@ -25,6 +52,11 @@ public class DateUtils implements Serializable{
     
     }
     
+    /**
+     * LocalDate to DateUtils
+     * @param today
+     * @return
+     */
     public static DateUtils LocalDateToDateUtils(LocalDate today) {
     	int year = Integer.parseInt(today.toString().substring(0, 4));
         int month = Integer.parseInt(today.toString().substring(5, 7));

@@ -3,6 +3,7 @@ package manager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import database.Data;
+import database.FileType;
 import model.MovieRank;
 import model.MovieReview;
 import utils.Helper;
@@ -49,6 +50,7 @@ public class ReviewMgr {
 		MovieReview newReview = new MovieReview(reviewID,userID,movieID,rating,comment);
 		movieReviewList.put(reviewID, newReview);
 		MovieRankMgr.addRating(movieID, userID, rating);
+		Data.saveFile(FileType.MOVIE_REVIEW);
 		return true;
 	}
 	
@@ -62,6 +64,7 @@ public class ReviewMgr {
 		int reviewID = Helper.getUniqueId(movieReviewList);
 		MovieReview newReview = new MovieReview(reviewID,userID,movieID,comment);
 		movieReviewList.put(reviewID, newReview);
+		Data.saveFile(FileType.MOVIE_REVIEW);
 		return true;
 	}
 	
@@ -75,7 +78,8 @@ public class ReviewMgr {
 		int reviewID = Helper.getUniqueId(movieReviewList);
 		MovieReview newReview = new MovieReview(reviewID,userID,movieID,rating);
 		movieReviewList.put(reviewID, newReview);
-		MovieRankMgr.addRating(movieID, userID, rating);		
+		MovieRankMgr.addRating(movieID, userID, rating);
+		Data.saveFile(FileType.MOVIE_REVIEW);
 		return true;
 	}
 	
@@ -90,6 +94,8 @@ public class ReviewMgr {
 		MovieReview buffer = SearchUtils.searchMovieReview(userID, movieID);
 		MovieRankMgr.changeRating(movieID, userID, num);
 		buffer.setRating(num);
+		movieReviewList.put(buffer.getReviewID(), buffer);
+		Data.saveFile(FileType.MOVIE_REVIEW);
 		return true;
 	}
 	
@@ -103,6 +109,8 @@ public class ReviewMgr {
 		}
 		MovieReview buffer = SearchUtils.searchMovieReview(userID, movieID);
 		buffer.setComment(comment);
+		movieReviewList.put(buffer.getReviewID(), buffer);
+		Data.saveFile(FileType.MOVIE_REVIEW);
 		return true;
 	}
 	

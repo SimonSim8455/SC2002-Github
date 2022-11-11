@@ -44,8 +44,13 @@ public class PriceCalculator {
 			basePrice = basePrice +tp.getMovieIMAXPrice();
 		}
 		
+		
 		if(cinemaType == CinemaType.PLATINIUM) {
-			basePrice = basePrice + tp.getPlatiniumPrice();
+			basePrice = basePrice + tp.getPlatiniumClassPrice();
+		}
+		
+		if(cinemaType == CinemaType.GOLD) {
+			basePrice = basePrice + tp.getGoldClassTicket();
 		}
 		
 		if(age<=12 && age>=6) {

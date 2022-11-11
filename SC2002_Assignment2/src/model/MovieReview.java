@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class MovieReview implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int reviewID;
 	private int userID;
 	private int movieID;

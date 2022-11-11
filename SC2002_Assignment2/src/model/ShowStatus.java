@@ -5,6 +5,10 @@ import utils.*;
 
 
 public class ShowStatus implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int showStatusID;
 	private int cineplexID;
 	private int cinemaID;

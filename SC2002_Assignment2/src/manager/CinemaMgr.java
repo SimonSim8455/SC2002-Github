@@ -4,6 +4,7 @@ package manager;
 import java.util.HashMap;
 import java.util.ArrayList;
 import database.Data;
+import database.FileType;
 import utils.Helper;
 import utils.SearchUtils;
 import utils.Validator;
@@ -20,6 +21,7 @@ public class CinemaMgr {
 		int cinemaID = Helper.getUniqueId(cinemaList);
 		Cinema newCinema = new Cinema(cinemaID,cineplexID,type,seatPlan,cinemaCode);
 		cinemaList.put(cinemaID, newCinema);
+		Data.saveFile(FileType.CINEMA);
 		return cinemaID;
 	}
 	

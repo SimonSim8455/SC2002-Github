@@ -5,7 +5,11 @@ import java.io.Serializable;
 import utils.DateUtils;
 
 public class Holiday implements Serializable{
-    private String holidayName;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String holidayName;
     private int holidayID;
     private DateUtils holidayDate;
 

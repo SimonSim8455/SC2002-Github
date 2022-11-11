@@ -5,5 +5,5 @@ import java.io.Serializable;
 public enum MovieType implements Serializable{
 	TWOD,
 	THREED,
-	IMAX
+	IMAX,
 }

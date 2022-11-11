@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.Data;
+import database.FileType;
 import model.Holiday;
 import utils.DateUtils;
 import utils.Helper;
@@ -28,6 +29,7 @@ public class HolidayMgr {
 		int holidayId = Helper.getUniqueId(holidayList);
 		Holiday holiday = new Holiday(holidayId,name,date);
 		holidayList.put(holidayId, holiday);
+		Data.saveFile(FileType.HOLIDAY);
 		return holidayId;
 	}
 	
@@ -36,6 +38,7 @@ public class HolidayMgr {
 			return false;
 		}
 		holidayList.remove(holidayId);
+		Data.saveFile(FileType.HOLIDAY);
 		return true;
 	}
 
@@ -47,6 +50,7 @@ public class HolidayMgr {
 		Holiday holiday = SearchUtils.searchHoliday(name, date);
 		int holidayId = holiday.getHolidayID();
 		holidayList.remove(holidayId);
+		Data.saveFile(FileType.HOLIDAY);
 		return true;
 	}
 	
@@ -59,6 +63,8 @@ public class HolidayMgr {
 		}
 		Holiday holiday = SearchUtils.searchHoliday(name, date);
 		holiday.setHolidayName(newName);
+		holidayList.put(holiday.getHolidayID(), holiday);
+		Data.saveFile(FileType.HOLIDAY);
 		return true;
 		
 	}
@@ -73,6 +79,8 @@ public class HolidayMgr {
 			return false;
 		}
 		holiday.setHolidayName(newName);
+		holidayList.put(holiday.getHolidayID(), holiday);
+		Data.saveFile(FileType.HOLIDAY);
 		return true;
 	}
 	
@@ -85,6 +93,8 @@ public class HolidayMgr {
 			return false;
 		}
 		updateHoliday.setHolidayDate(newDate);
+		holidayList.put(updateHoliday.getHolidayID(), updateHoliday);
+		Data.saveFile(FileType.HOLIDAY);
 		return true;
 		
 	}
@@ -99,6 +109,8 @@ public class HolidayMgr {
 			return false;
 		}
 		holiday.setHolidayDate(newDate);
+		holidayList.put(holiday.getHolidayID(), holiday);
+		Data.saveFile(FileType.HOLIDAY);
 		return true;
 		
 	}

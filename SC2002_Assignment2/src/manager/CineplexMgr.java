@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.Data;
+import database.FileType;
 import model.Cineplex;
 import utils.Helper;
 import utils.SearchUtils;
@@ -20,6 +21,7 @@ public class CineplexMgr {
 		int cineplexID = Helper.getUniqueId(cineplexList);
 		Cineplex newCineplex = new Cineplex(cineplexID, name);
 		cineplexList.put(cineplexID, newCineplex);
+		Data.saveFile(FileType.CINEPLEX);
 		return true;
 	}
 	

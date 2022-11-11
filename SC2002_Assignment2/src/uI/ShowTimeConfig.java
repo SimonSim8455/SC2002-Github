@@ -103,6 +103,7 @@ public class ShowTimeConfig {
 			System.out.println("1) 2D");
 			System.out.println("2) 3D");
 			System.out.println("3) IMAX");
+			System.out.println("4) BLOCKBUSTER");
 			System.out.print("Enter Movie Type ID: ");
 			typeID = sc.nextInt();
 			switch(typeID) {

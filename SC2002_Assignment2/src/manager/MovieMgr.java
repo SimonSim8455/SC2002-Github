@@ -3,6 +3,7 @@ package manager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import database.Data;
+import database.FileType;
 import model.Movie;
 import model.MovieStates;
 import model.ShowStatus;
@@ -25,6 +26,7 @@ public class MovieMgr {
 		Movie buffer = new Movie(movieID,title,director,casts,movieContent,duration,state);
 		movieList.put(movieID, buffer);
 		MovieRankMgr.createMovieRank(movieID, numRaters, overallRating, sales);
+		Data.saveFile(FileType.MOVIE);
 		return movieID;
 		
 	}
@@ -39,6 +41,8 @@ public class MovieMgr {
 		Movie buffer = new Movie(movieID,title,director,casts,movieContent,duration,state);
 		movieList.put(movieID, buffer);
 		MovieRankMgr.createMovieRank(movieID);
+		
+		Data.saveFile(FileType.MOVIE);
 		return movieID;
 		
 	}
@@ -53,6 +57,7 @@ public class MovieMgr {
 		for(int i=0;i<list.size();i++) {
 			ShowStatusMgr.removeShowStatus(list.get(i).getShowStatusID());
 		}
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 		
@@ -62,6 +67,8 @@ public class MovieMgr {
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
 		updateMovie.setMovieContent(text);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 	
@@ -72,6 +79,8 @@ public class MovieMgr {
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
 		updateMovie.setDirector(text);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 	
@@ -84,6 +93,8 @@ public class MovieMgr {
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
 		updateMovie.setTitle(title);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 	
@@ -96,6 +107,8 @@ public class MovieMgr {
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
 		updateMovie.setMovieState(state);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 		
 	}
@@ -112,6 +125,8 @@ public class MovieMgr {
 			}
 		}
 		casts.add(cast);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 	
@@ -132,6 +147,8 @@ public class MovieMgr {
 			return false;
 		}
 		casts.remove(index);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 	
@@ -141,6 +158,8 @@ public class MovieMgr {
 		}
 		Movie updateMovie = SearchUtils.searchMovie(movieID);
 		updateMovie.setDuration(duration);
+		movieList.put(movieID, updateMovie);
+		Data.saveFile(FileType.MOVIE);
 		return true;
 	}
 	

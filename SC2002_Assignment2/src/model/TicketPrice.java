@@ -3,7 +3,11 @@ package model;
 import java.io.Serializable;
 
 public class TicketPrice implements Serializable{
-    private double basePrice;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private double basePrice;
     private double weekendPrice;
     private double studentDiscount;
     private double elderlyDiscount;
@@ -12,11 +16,11 @@ public class TicketPrice implements Serializable{
     private double movie2DPrice;
     private double movie3DPrice;
     private double movieIMAXPrice;
-    private double platiniumPrice;
+    private double platiniumClassPrice;
     private double holidayPrice;
     
     public TicketPrice(double basePrice,double weekendPrice,double studentDiscount,double elderlyDiscount,double goldClassTicket,
-    		double coupleTicket,double movie2DPrice,double movie3DPrice,double movieIMAXPrice,double platiniumPrice, double holidayPrice) {
+    		double coupleTicket,double movie2DPrice,double movie3DPrice,double movieIMAXPrice,double platiniumClassPrice, double holidayPrice) {
         this.basePrice = basePrice ;
         this.weekendPrice =weekendPrice;
         this.studentDiscount=studentDiscount;
@@ -26,7 +30,7 @@ public class TicketPrice implements Serializable{
         this.movie2DPrice=movie2DPrice;
         this.movie3DPrice=movie3DPrice;
         this.movieIMAXPrice=movieIMAXPrice;
-        this.platiniumPrice = platiniumPrice;
+        this.platiniumClassPrice = platiniumClassPrice;
         this.holidayPrice = holidayPrice;
     }
     
@@ -43,7 +47,7 @@ public class TicketPrice implements Serializable{
     			another.getMovie2DPrice(),
     			another.getMovie3DPrice(),
     			another.getMovieIMAXPrice(),
-    			another.getPlatiniumPrice(),
+    			another.getPlatiniumClassPrice(),
     			another.getHolidayPrice()
     	);
     	return tp;
@@ -55,11 +59,11 @@ public class TicketPrice implements Serializable{
     public double getHolidayPrice() {
     	return this.holidayPrice;
     }
-    public void setPlatiniumPrice(double price) {
-    	this.platiniumPrice = price;
+    public void setPlatiniumClassPrice(double price) {
+    	this.platiniumClassPrice = price;
     }
-    public double getPlatiniumPrice() {
-    	return this.platiniumPrice;
+    public double getPlatiniumClassPrice() {
+    	return this.platiniumClassPrice;
     }
     public double getBasePrice(){
         return this.basePrice;

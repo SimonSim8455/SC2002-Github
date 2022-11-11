@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Movie implements Serializable{
-    private int movieID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int movieID;
     private String title;
     private String director;
     private ArrayList<String> casts;

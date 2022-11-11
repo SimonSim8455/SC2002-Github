@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.Data;
+import database.FileType;
 import model.*;
 import model.SeatType;
 import model.ShowStatus;
@@ -56,6 +57,7 @@ public class ShowStatusMgr {
 		ShowStatus buffer = new ShowStatus(showStatusID, cineplexID, cinemaID, 
 			movieID, showDate, showTime, movieType, seatStatus);
 		showStatusList.put(showStatusID, buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -75,6 +77,7 @@ public class ShowStatusMgr {
 		ShowStatus buffer = new ShowStatus(showStatusID, cineplexID, cinemaID, 
 			movieID, showDate, showTime, movieType, seatStatus);
 		showStatusList.put(showStatusID, buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -83,6 +86,7 @@ public class ShowStatusMgr {
 			return false;
 		}
 		showStatusList.remove(showStatusID);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -92,6 +96,8 @@ public class ShowStatusMgr {
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
 		buffer.setMovieID(movieID);
+		showStatusList.put(buffer.getShowStatusID(), buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -105,6 +111,8 @@ public class ShowStatusMgr {
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
 		buffer.setMovieID(movie.getMovieID());
+		showStatusList.put(buffer.getShowStatusID(), buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -114,6 +122,8 @@ public class ShowStatusMgr {
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
 		buffer.setShowDate(date);
+		showStatusList.put(buffer.getShowStatusID(), buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -123,6 +133,8 @@ public class ShowStatusMgr {
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
 		buffer.setShowTime(time);
+		showStatusList.put(buffer.getShowStatusID(), buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -133,6 +145,8 @@ public class ShowStatusMgr {
 		}
 		ShowStatus buffer = SearchUtils.searchShowStatus(showStatusID);
 		buffer.setMovieType(type);
+		showStatusList.put(buffer.getShowStatusID(), buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	
@@ -159,6 +173,8 @@ public class ShowStatusMgr {
 		if(type == SeatType.COUPLE_2) {
 			buffer.getseatStatus()[i][j-1] = takenSeat(SeatType.COUPLE_1);
 		}
+		showStatusList.put(buffer.getShowStatusID(), buffer);
+		Data.saveFile(FileType.SHOW_STATUS);
 		return true;
 	}
 	

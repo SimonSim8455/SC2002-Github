@@ -4,6 +4,7 @@ package manager;
 import java.util.HashMap;
 
 import database.Data;
+import database.FileType;
 import model.UserAccount;
 import utils.Helper;
 import utils.SearchUtils;
@@ -29,6 +30,7 @@ public class UserAccountMgr {
 		int userID = Helper.getUniqueId(userAccountList);
 		UserAccount newUser = new UserAccount(userID,username,password,mobileNumber,email,age);
 		userAccountList.put(userID, newUser);
+		Data.saveFile(FileType.USER);
 		return true;
 	}
 	
@@ -38,6 +40,8 @@ public class UserAccountMgr {
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
 		updateUser.setEmail(text);
+		userAccountList.put(userID, updateUser);
+		Data.saveFile(FileType.USER);
 		return true;
 	}
 	
@@ -47,6 +51,8 @@ public class UserAccountMgr {
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
 		updateUser.setMobileNumber(text);
+		userAccountList.put(userID, updateUser);
+		Data.saveFile(FileType.USER);
 		return true;
 	}
 	
@@ -56,6 +62,8 @@ public class UserAccountMgr {
 		}
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
 		updateUser.setPassword(text);
+		userAccountList.put(userID, updateUser);
+		Data.saveFile(FileType.USER);
 		return true;
 	}
 	
@@ -68,6 +76,8 @@ public class UserAccountMgr {
 			return false;
 		}
 		updateUser.setUsername(text);
+		userAccountList.put(userID, updateUser);
+		Data.saveFile(FileType.USER);
 		return true;
 	}
 	
@@ -78,7 +88,8 @@ public class UserAccountMgr {
 		UserAccount updateUser = SearchUtils.searchUserAccount(userID);
 
 		updateUser.setAge(num);
-
+		userAccountList.put(userID, updateUser);
+		Data.saveFile(FileType.USER);
 		return true;
 	}
 	

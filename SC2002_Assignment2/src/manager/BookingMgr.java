@@ -7,6 +7,7 @@ import java.util.HashMap;
 import model.*;
 
 import database.Data;
+import database.FileType;
 import utils.DateUtils;
 import utils.Helper;
 import utils.SearchUtils;
@@ -30,6 +31,7 @@ public class BookingMgr {
 		Booking newBooking = new Booking(bookingID, userID, showStatusID, price, bookingDate, bookingTime);
 		bookingList.put(bookingID, newBooking);
 		MovieRankMgr.addSales(buffer.getMovieID(),price);
+		Data.saveFile(FileType.BOOKING);
 		return bookingID;
 		
 	}
@@ -50,6 +52,7 @@ public class BookingMgr {
 		
 		bookingList.put(bookingID, newBooking);
 		MovieRankMgr.addSales(buffer.getMovieID(),price);
+		Data.saveFile(FileType.BOOKING);
 		return bookingID;
 		
 	}

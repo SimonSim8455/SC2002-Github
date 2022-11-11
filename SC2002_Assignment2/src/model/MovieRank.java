@@ -3,6 +3,10 @@ package model;
 import java.io.Serializable;
 
 public class MovieRank implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int movieRankID;
 	private int movieID;
 	private int numRaters;

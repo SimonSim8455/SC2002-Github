@@ -1,6 +1,7 @@
 package manager;
 
 import database.Data;
+import database.FileType;
 import model.TicketPrice;
 
 public class TicketPriceMgr {
@@ -40,11 +41,13 @@ public class TicketPriceMgr {
 				ticketPrice.setMovieIMAXPrice(num);
 				break;
 			case 9:
-				ticketPrice.setPlatiniumPrice(num);
+				ticketPrice.setPlatiniumClassPrice(num);
 				break;
 			default:
 				return false;
 		}
+		ticketPrice = TicketPrice.copy(ticketPrice);
+		Data.saveFile(FileType.TICKET_PRICE);
 		return true;
 	}
 }
