@@ -1,0 +1,9 @@
+Update DataInitialze
+Update Movie.java
+Update Data.java (forgot to put USer in read serialize)
+Update Movie States
+Update Movie Age R
+Update Movie Mgr
+Update Printer
+Update Movie App
+Update Movie Config
